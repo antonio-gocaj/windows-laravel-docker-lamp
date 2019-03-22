@@ -1,0 +1,43 @@
+version: "3.1"
+services:
+    www:
+        build: .
+        container_name: 'local-webserver'
+        ports: 
+            - "80:80"
+        volumes:
+            - .:/var/www
+            - ./vhosts.conf:/etc/apache2/sites-available/000-default.conf
+        links:
+            - db
+        networks:
+            - default
+    db:
+        image: mysql:5.7
+        container_name: 'local-db'
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: colosseum
+            MYSQL_USER: user
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: secret 
+        volumes:
+            - ./dump:/docker-entrypoint-initdb.d
+            - ./dbconf:/etc/mysql/conf.d
+            - persistent:/var/lib/mysql
+        networks:
+            - default
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: 'local-phpmyadmin'
+        links: 
+            - db:db
+        ports:
+            - 8000:80
+        environment:
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: secret 
+volumes:
+    persistent:
