@@ -23,7 +23,7 @@ services:
             MYSQL_PASSWORD: secret
             MYSQL_ROOT_PASSWORD: secret 
         volumes:
-            - ./dump:/docker-entrypoint-initdb.d
+            - ./db_dump:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
             - default
