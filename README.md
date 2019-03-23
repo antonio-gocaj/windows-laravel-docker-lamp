@@ -24,6 +24,7 @@ This Docker environment comes with:
 JSON,
 BCMath. And composer.).
 - MYSQL 5.7
+- Phpmyadmin
 
 ## Installing
 
