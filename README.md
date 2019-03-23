@@ -1,4 +1,4 @@
-# LAMP enviment for Laravel Apps with Docker.
+# LAMP environment for Laravel Apps with Docker.
 
 Minimal setup to run Laravel apps locally.
 
